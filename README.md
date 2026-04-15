@@ -9,7 +9,25 @@ An automated utility to generate **Cloud-Init Seed ISOs** (cidata) for KVM/libvi
 - **Dynamic Networking**: Renames hostnames based on assigned Tailscale IPs.
 - **Auto-Reboot**: Reboots the VM once configuration is successfully applied.
 
-## 🛠 Prerequisites
+## 🧹 Template VM Preparation
+
+Before converting your Ubuntu VM into a template, run these commands inside the VM to reset its identity (Machine ID, SSH keys, and logs).
+Full Cleanup 
+```
+sudo cloud-init clean
+sudo rm -rf /var/lib/cloud/*
+sudo truncate -s 0 /etc/machine-id
+sudo rm -f /var/lib/dbus/machine-id
+sudo rm -f /etc/ssh/ssh_host_*
+sudo truncate -s 0 /var/log/*.log
+history -c && rm -f ~/.bash_history
+sudo hostnamectl set-hostname localhost
+sudo rm -f /etc/netplan/*.yaml
+sudo rm -rf /tmp/* /var/tmp/*
+sudo poweroff
+```
+
+## 🛠 Prerequisites to run script
 
 Before running the script, ensure your host system has the necessary tools installed:
 
@@ -38,3 +56,13 @@ kvm-cloud-init-automation/
 ├── LICENSE
 └── .gitignore
 ```
+## Output Images of Project
+
+1 ) Generate the Seed ISO
+  <img width="2032" height="1110" alt="Screenshot 2026-04-15 at 9 20 14 PM" src="https://github.com/user-attachments/assets/50aa0668-727a-4265-b23a-d7c30692fd87" />
+
+2 ) Attach to Virtual Machine
+  <img width="2032" height="1110" alt="Screenshot 2026-04-15 at 9 23 16 PM" src="https://github.com/user-attachments/assets/6193a4b3-b142-4d11-8308-a677459f7b0a" />
+
+3 ) Verifying Cloud-Init Success
+  <img width="2032" height="1095" alt="Screenshot 2026-04-15 at 10 22 43 PM" src="https://github.com/user-attachments/assets/d7c7d850-cb7b-4a17-a09a-859dae05642a" />
