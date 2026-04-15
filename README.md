@@ -1,4 +1,4 @@
-# KVM Seed ISO Generator
+# kvm-cloud-init-automation
 
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Bash](https://img.shields.io/badge/Script-Bash-121011?logo=gnu-bash&logoColor=white)
