@@ -1,0 +1,9 @@
+# Ignore generated ISOs
+*.iso
+
+# Ignore temp working directories
+seed-*/
+
+# Ignore sensitive keys if you ever save them to files
+.env
+*.key

@@ -1,0 +1,34 @@
+#cloud-config
+
+package_update: true
+
+packages:
+  - qemu-guest-agent
+  - curl
+
+runcmd:
+  - systemctl enable --now qemu-guest-agent
+  - |
+    # Install Tailscale
+    curl -fsSL https://tailscale.com/install.sh | sh
+
+    # Authenticate with Tailscale
+    tailscale up --authkey=tskey-auth-YOUR-KEY-HERE
+
+    # Loop to wait for IP and set hostname
+    for i in $(seq 1 20); do
+      TS_IP=$(ip -4 addr show tailscale0 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+      if [ -n "$TS_IP" ]; then
+        DASHED_IP=$(echo "$TS_IP" | sed 's/\./-/g')
+        hostnamectl set-hostname "ip-$DASHED_IP"
+        echo "$TS_IP" > /root/tailscale-ip.txt
+        break
+      fi
+      sleep 2
+    done
+
+power_state:
+  mode: reboot
+  message: "Cloud-init complete. Rebooting to apply changes."
+  timeout: 10
+  condition: True
