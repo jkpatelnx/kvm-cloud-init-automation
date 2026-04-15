@@ -1,6 +1,8 @@
 # KVM Seed ISO Generator
 
 ![License](https://img.shields.io/badge/License-MIT-blue)
+![Bash](https://img.shields.io/badge/Script-Bash-121011?logo=gnu-bash&logoColor=white)
+![YAML](https://img.shields.io/badge/Config-YAML-CB171E?logo=yaml&logoColor=white)
 
 An automated utility to generate **Cloud-Init Seed ISOs** (cidata) for KVM/libvirt virtual machines. This tool streamlines the process of injecting configuration and networking logic into "NoCloud" datasources.
 
