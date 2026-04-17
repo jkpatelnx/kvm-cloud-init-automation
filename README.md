@@ -6,6 +6,9 @@
 
 An automated utility to generate **Cloud-Init Seed ISOs** (cidata) for KVM/libvirt virtual machines. This tool streamlines the process of injecting configuration and networking logic into "NoCloud" datasources.
 
+<img width="1280" height="720" alt="Untitled (1600 x 840 px)(1)" src="https://github.com/user-attachments/assets/30a90c73-1f4b-4f22-af30-e7997b33e2a6" />
+
+
 ## Features
 - **Tailscale Integration**: Automatically joins your tailnet on first boot.
 - **Dynamic Networking**: Renames hostnames based on assigned Tailscale IPs.
