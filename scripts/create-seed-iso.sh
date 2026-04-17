@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# ==========================================
+####################################################
 # create-seed-iso.sh (Interactive Version)
-# ==========================================
+####################################################
 
 set -e
 
@@ -29,14 +29,20 @@ echo "👉 Preparing working directory..."
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
 
+####################################################
 # Create meta-data
+####################################################
+
 cat > meta-data <<EOF
 instance-id: ${VM_NAME}-$(date +%s)
 local-hostname: ${VM_NAME}
 EOF
 
+####################################################
 # Create user-data
 # Note: We use 'EOF' (quoted) but pass the TS_KEY variable in
+####################################################
+
 cat > user-data <<EOF
 #cloud-config
 
@@ -75,7 +81,10 @@ power_state:
   condition: True
 EOF
 
+####################################################
 # Create seed ISO
+####################################################
+
 echo "👉 Creating seed ISO..."
 xorriso -as mkisofs \
   -output "$ISO_NAME" \
